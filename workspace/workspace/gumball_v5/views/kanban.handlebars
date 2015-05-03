@@ -1,0 +1,423 @@
+<html>
+    <head>
+        <title>KanBan Board</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        
+    </head>
+    <body>
+    <form form name="showcards" method="post" action='showcards'>    
+    <div style="background-color:lightgray;background-color: lightgray; margin-top: -20px; padding-left: 100px; padding-top: 20px;color:darkblue" class="page-header">
+        <h1><i>Kan-Ban</i></h1>
+        <h2>{{state}}<h2>
+    </div>
+    
+	<div style="text-align:center;">
+		<div style="padding-top:50px;">
+		    <button type="button" class="btn btn-info btn" data-toggle="modal" data-target="#myModal">Create Task</button>
+		    <INPUT type="Submit"  name ="showallcards" id="showallcard" value="showallcards" class="btn btn-primary"/>
+            <INPUT type="Submit"  name ="queuestatus" id="queuestatus" value="queuestatus" class="btn btn-primary"/>            
+        </div>
+	</div>
+	</form>
+	<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">New Card Details</h4>
+        </div>
+        <div class="modal-body">
+        <form class="contact" name="contact" id="contact" method='post' action='contact'>
+                <label>card</label><br>
+                <input type="text" name="card" id="card" class="form-control" placeholder="card name"/><br>
+                <label>Assigned to</label><br>
+                <input type="text" name="assignedto" id="assignedto" class="form-control" placeholder="developer name"/><br>
+                <label>Start time</label><br>
+                <input type="text" name="starttime" id="starttime" class="form-control" placeholder="starttime"/><br>
+                <label>End time</label><br>
+                <input type="text" name="endtime" id="endtime" class="form-control" placeholder="Title on a card"/><br>
+               
+                <label>Description</label><br>
+                <textarea name="message" class="form-control"></textarea>
+            <!--    <input type="text" name="btAdd" style="display:none;" class="form-control" placeholder="Story Points"/><br>-->
+                    
+      
+        <div class="modal-footer">
+           <!-- <button type="button" id="btProgress" style="display:none;" class="btn btn-primary " data-dismiss="modal">Start Progress</button> -->
+		   <!-- <input type="submit" id="btAdd" name="btAdd" value="btAdd" class="btn btn-primary " ></input>   -->
+		    <input type="submit" value="btAdd" id="btAdd" name="btAdd" class="btn btn-primary"/>
+		    <input type="submit" value="btProgress" id="btProgress" name="btProgress" class="btn btn-primary"/>
+            <button type="button" id="btDone" style="display:none;"class="btn btn-primary " data-dismiss="modal">Complete Task</button>
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        </form>
+          </div>
+         </div>
+    </div>
+  </div>
+
+    <table style="border: 1px solid #ffffff;border-radius: 10px;box-shadow: 0 1px 10px 0 rgba(0, 2, 0, 0.098);" border="2" class="table">
+        <tbody>
+            <tr id="task_pool_header_container" class="column_main">
+                <th class="task_pool_header  dotted_separator">
+                    <div class="header_name click">
+                        <span class="title_text">To Do</span>
+                    {{#each kanbandata}}
+                    
+                        <div id='tb' class='big_container' >
+                            <div class='box_itm rounded' id='box_itm1'>
+                                <div class='name' id='name1'>Story {{this.card}} <a data-toggle='modal' data-target='#myModal' id='edit' class='edit_p pull-right'>
+                                    <i class='glyphicon glyphicon-pencil'></i></a></div><div class='dotted_hr'>
+                                        <a class='pull-right remove' id='btRemove' >
+                                            <i class=' glyphicon glyphicon-remove'></i></a></div>
+                                            <div class='name' id='resp1'>{{this.assignedto}} </div>
+                                            <div class='small'><div class='itm_box_option' n='1' style='display: none;'>
+                                                <input type='hidden' value='rgb(247, 148, 29)' data-colorlink='box_itm1' data-text='hidden' class='color colorete mColorPicker' n='1' id='color_0' style='background-color: rgb(247, 148, 29); color: black;'><span id='mcp_color_0' class='mColorPickerTrigger color colorete mColorPicker' style='display: inline-block; cursor: pointer; border: 1px solid black; float: left; width: 10px; height: 10px; background-color: rgb(247, 148, 29); color: black;'>&nbsp;</span>
+                                                </div></div></div><div class='clear'></div></div></div>
+                        
+                    {{/each}}
+                    </div>
+                </th>
+                <th class="task_pool_header  dotted_separator">
+                    <div class="header_name click">
+                        <span class="title_text">In Process</span>
+                       
+ 
+                        
+                    </div>
+                </th>
+                <th class="task_pool_header dotted_separator">
+                    <div class="header_name click">
+                        <span class="title_text">Done</span>
+                    </div>
+                </th>
+            </tr>
+            <tr id="task_pool_container" class="column_main">
+                <td id="main" class="task_pool dotted_separator ui-sortable">
+                    <div id="draggagle"></div>
+                </td>
+                <td class="task_pool dotted_separator ui-sortable">
+                    <div id="droptarget"></div>
+                </td>
+                <td class="task_pool dotted_separator ui-sortable">
+                    <div id="done"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+    $(document).ready(function() {
+        
+         var injectScript = function(src, options) {
+            options || (options = {});
+            injectTag('script', {src: src, type: 'text/javascript'}, options);
+        };
+        
+         var injectStyle = function(href, options) {
+            options || (options = {});
+            var img = document.createElement('img');
+
+            img.onerror = options.onload || null;
+            delete options.onload;
+
+            injectTag('link', {href: href, type: 'text/css', rel: 'stylesheet'}, options);
+            img.src = href;
+        };
+         var injectTag = function (tagName, attrs, options) {
+            options || (options = {});
+
+            var tag = document.createElement(tagName);
+            tag.onload = options.onload || null;
+
+            Object.keys(attrs).forEach(function(key) {
+                tag.setAttribute(key, attrs[key]);
+            });
+
+            if (options.insertBefore) {
+                options.insertBefore.parentNode.insertBefore(tag, options.insertBefore);
+            } else if (options.appendChild) {
+                options.appendChild.appendChild(tag);
+            } else {
+                var scripts = document.getElementsByTagName('script');
+                scripts[scripts.length - 1].parentNode.appendChild(tag);
+            }
+        };
+
+        
+        injectStyle("//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css");
+        
+        var iCnt = 0;
+		var id,done_id;
+		var remove_id,remove_p_id;
+        var container = $(document.createElement('div'));
+
+		$('#btAdd').click(function() {
+		    $('#contact').submit();
+            $('#btProgress').hide();
+            $('#btAdd').show();
+            $('#btDone').hide();
+            if (iCnt <= 19) {
+                iCnt = iCnt + 1;
+				var addTask = "<div id=tb" + iCnt + " class='big_container' ><div class='box_itm rounded' id='box_itm1'><div class='name' id='name1'>Story " + iCnt + " <a data-toggle='modal' data-target='#myModal' id='edit" + iCnt + "' class='edit_p pull-right'><i class='glyphicon glyphicon-pencil'></i></a></div><div class='dotted_hr'><a class='pull-right remove' id='btRemove" + iCnt + "' ><i class=' glyphicon glyphicon-remove'></i></a></div><div class='name' id='resp1'>Description </div><div class='small'><div class='itm_box_option' n='1' style='display: none;'><input type='hidden' value='rgb(247, 148, 29)' data-colorlink='box_itm1' data-text='hidden' class='color colorete mColorPicker' n='1' id='color_0' style='background-color: rgb(247, 148, 29); color: black;'><span id='mcp_color_0' class='mColorPickerTrigger color colorete mColorPicker' style='display: inline-block; cursor: pointer; border: 1px solid black; float: left; width: 10px; height: 10px; background-color: rgb(247, 148, 29); color: black;'>&nbsp;</span></div></div></div><div class='clear'></div></div></div>";
+
+                $('#draggagle').append(addTask);
+            }
+            $('#myModal').modal('hide');
+        });
+
+        $('#btRemove').click(function() {
+			
+            if (iCnt != 0) {
+                $('#tb' + iCnt).remove();
+				
+                iCnt = iCnt - 1;
+            }
+            if (iCnt == 0) {
+                $(container).empty();
+                $(container).remove();
+            }
+        });
+        $('#draggagle').on('click', '.remove', function(){
+		
+			remove_id = $(this).attr('id');
+			var count = remove_id.substr(remove_id.length - 1);			
+			
+            if (count != 0) {
+                $('#tb' + count).remove();
+			}
+            if (count == 0) {
+                $('#droptarget').empty();                
+            }
+        });
+
+        $('#draggagle').on('click', '.edit_p', function(){
+			id = $(this).attr('id');
+		    $('#btProgress').show();
+            $('#btAdd').hide();
+            $('#btDone').hide();
+        });
+		
+        $('#btProgress').click(function() {		
+			var count = id.substr(id.length - 1);		
+            if (count != 0) {
+                $('#tb' + count).remove();              
+            }
+            if (count == 0) {
+                $(container).empty();
+                $(container).remove();
+            }
+            if (count <= 19) {
+                
+                var addTask = "<div id=tb_p" + count + " class='big_container' ><div class='box_itm rounded' id='box_itm1'><div class='name' id='name1'>Story " + count + " <a data-toggle='modal' data-target='#myModal' id='edit_done" + count + "' class='edit_d pull-right'><i class='glyphicon glyphicon-pencil'></i></a></div><div class='dotted_hr'><a class='pull-right remove_p' id='btRemove" + count + "'><i class='glyphicon glyphicon-remove'></i></a></div><div class='name' id='resp1'>Description </div><div class='small'><div class='itm_box_option' n='1' style='display: none;'><input type='hidden' value='rgb(247, 148, 29)' data-colorlink='box_itm1' data-text='hidden' class='color colorete mColorPicker' n='1' id='color_0' style='background-color: rgb(247, 148, 29); color: black;'><span id='mcp_color_0' class='mColorPickerTrigger color colorete mColorPicker' style='display: inline-block; cursor: pointer; border: 1px solid black; float: left; width: 10px; height: 10px; background-color: rgb(247, 148, 29); color: black;'>&nbsp;</span></div></div></div><div class='clear'></div></div></div>";
+
+                $('#droptarget').append(addTask);
+            }
+			$('#btProgress').hide();
+            $('#btAdd').show();
+        });
+
+        $('#droptarget').on('click', '.edit_d', function(){
+			done_id=$(this).attr('id');
+            $('#btProgress').hide();
+            $('#btAdd').hide();
+            $('#btDone').show();
+        });
+		
+		$('#droptarget').on('click', '.remove_p', function(){		 
+			remove_p_id = $(this).attr('id');
+			var count = remove_p_id.substr(remove_p_id.length - 1);				
+            if (count != 0) {
+                $('#tb_p' + count).remove();
+			}
+            if (count == 0) {
+                $('#droptarget').empty();                
+            }
+        });
+		
+        $('#btDone').click(function() {
+            var count = done_id.substr(done_id.length - 1);
+            if (count != 0) {
+                $('#tb_p' + count).remove();                
+            }
+            if (count == 0) {
+                $('#tb_p' + count).remove();                
+            }
+            if (count <= 19) {
+                
+                var addTask = "<div id=tb_d" + count + " class='big_container' ><div class='box_itm rounded' id='box_itm1'><div class='name' id='name1'>Story " + count + " </div><div class='dotted_hr'></div><div class='name' id='resp1'>Description </div><div class='small'><div class='itm_box_option' n='1' style='display: none;'><input type='hidden' value='rgb(247, 148, 29)' data-colorlink='box_itm1' data-text='hidden' class='color colorete mColorPicker' n='1' id='color_0' style='background-color: rgb(247, 148, 29); color: black;'><span id='mcp_color_0' class='mColorPickerTrigger color colorete mColorPicker' style='display: inline-block; cursor: pointer; border: 1px solid black; float: left; width: 10px; height: 10px; background-color: rgb(247, 148, 29); color: black;'>&nbsp;</span></div></div></div><div class='clear'></div></div></div>";
+
+                $('#done').append(addTask);
+            }
+			$('#btDone').hide();
+			$('#btProgress').hide();
+            $('#btAdd').show();
+        });
+
+        $('#btRemoveAll').click(function() {
+            $('#draggagle').empty();
+			$('#droptarget').empty();			
+            iCnt = 0;
+        });
+    });
+    </script>
+    <style>
+        
+.background {
+    background-color: white;
+    cursor: auto;
+    font-family: "Karla",sans-serif;
+}
+#main_div {
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+.table {
+    border: 0 none;
+    margin: 30px auto;
+    min-width: 600px;
+
+}
+
+.column_main {
+    background-color: #f9f9f9;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.098);
+    margin-left: 10px;
+}
+.table th {
+    border: 0 none;
+    border-bottom: 1px solid #5bc0de;
+    color: #555555;
+    margin: 2px;
+    text-align: center;
+    width: 240px;
+}
+.header_input {
+    margin: 5px;
+}
+.title_bullet {
+    height: 15px;
+    margin-right: 5px;
+    width: 16px;
+}
+.table td {
+    border: medium none;
+    height: 300px;
+    padding: 0 5px;
+    text-align: center;
+    width: 240px;
+}
+.dotted_separator {
+    border-right: 2px solid #dddddd !important;
+}
+.box_itm {
+
+    border: 1px solid silver;
+
+    margin: 5px 5px 0;
+    padding: 5px;
+    background:#fefabc;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size:15px;
+    color: #000;
+
+
+
+
+    box-shadow: 0px 4px 6px #333;
+    -moz-box-shadow: 0px 4px 6px #333;
+    -webkit-box-shadow: 0px 4px 6px #333;
+
+}
+.dotted_hr {
+    background: url("../img/mookup/horizontal_dots.png") repeat scroll 0 0 transparent;
+    height: 1px;
+    margin: 0 20px;
+}
+
+.pull-right {
+    cursor: pointer;
+}
+.name {
+    margin: 5px;
+    text-align: left;
+    text-indent: 20px;
+    text-transform: capitalize;
+    padding-right: 12px;
+}
+.pbar {
+    display: block;
+    height: 10px !important;
+    margin: 5px 5px 5px 20px;
+    width: 170px;
+}
+.shadow {
+    background: url("../img/mookup/post-it_sombra.png") no-repeat scroll 0 0 transparent;
+    height: 14px;
+    margin: 0 0 0 6px;
+}
+.small {
+    font-size: 0.7em;
+    height: 20px;
+    margin: 5px;
+}
+.option {
+    cursor: pointer;
+    float: right;
+}
+.click {
+    cursor: pointer;
+}
+.fright {
+    float: right;
+}
+.clear {
+    clear: both;
+}
+.rounded {
+    border-radius: 5px;
+}
+.colorete {
+    float: left;
+    height: 24px;
+    margin-left: 15px;
+    width: 24px;
+}
+.close {
+    height: 24px;
+    margin-right: 12px;
+    width: 24px;
+}
+.edit {
+    height: 24px;
+    margin-right: 3px;
+    width: 24px;
+}
+.save_header {
+    height: 24px;
+    width: 24px;
+}
+.save {
+    height: 24px;
+    width: 24px;
+}
+.WIP {
+    color: #888888;
+    font-size: 0.7em;
+    margin: 5px;
+    padding-right: 10px;
+    text-align: right;
+}
+
+    </style>
+    </body>
+</html>

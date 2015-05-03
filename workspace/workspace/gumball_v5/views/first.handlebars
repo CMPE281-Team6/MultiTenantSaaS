@@ -1,0 +1,344 @@
+
+<HTML>
+<HEAD>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <TITLE> Home </TITLE>
+    	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+			
+		body{
+				font-family:"Trebuchet MS", "Myriad Pro", Arial, sans-serif;
+				font-size:14px;
+				background:#f4f4f4 repeat top left;
+				color:#333;
+				text-shadow:1px 1px 1px #fff;
+				overflow-y:scroll;
+			}
+		table{
+				font-family:"Trebuchet MS", "Myriad Pro", Arial, sans-serif;
+				font-size:14px;
+				background:#f4f4f4 repeat top left;
+				color:#333;
+				text-shadow:1px 1px 1px #fff;
+				overflow-y:scroll;
+				display:block;
+				padding:10px 30px 0px 30px;
+
+				margin:10px 0px 0px 0px;
+				-moz-box-shadow:1px 1px 7px #ccc;
+			}
+			h1{
+				font-size:56px;
+			}
+			h2{
+				font-size:20px;
+				padding:0px 0px 40px 0px;
+				color:#aaa;
+			}
+			h2 span{
+				color:#ffa800;
+			}
+			a{
+				color:#777;
+			}
+			a:hover{
+				color:#222;
+			}
+			p{
+				padding:5px 0px;
+			}
+			.wrapper{
+				width:900px;
+				margin:20px auto;
+				min-height:550px;
+			}
+			.box{
+				width:75%;
+			}
+			.left{
+				float:left;
+			}
+			.right{
+				float:right;
+			}
+			.clear{
+				clear:both;
+			}
+			a.back{
+				color:#777;
+				position:fixed;
+				top:5px;
+				right:10px;
+				text-decoration:none;
+			}
+			/* Form Style */
+			.create{
+				background:#fff;
+				border:1px solid #ddd;
+				margin:0 auto;
+				width:900px;
+				font-size:16px;
+				-moz-box-shadow:1px 1px 7px #ccc;
+				-webkit-box-shadow:1px 1px 7px #ccc;
+				box-shadow:1px 1px 7px #ccc;
+			}
+			.create h3{
+				padding:20px 30px 20px 30px;
+				background-color:#444;
+				color:#fff;
+				font-size:25px;
+				border-bottom:1px solid #ddd;
+			}
+			.create form{
+				
+				background:#fff;
+			}
+			.create .column{
+				width:47%;
+				float:left;
+			}
+			form.active{
+				display:block;
+			}
+			form.login{
+				width:350px;
+			}
+			form.register{
+				width:550px;
+			}
+			form.forgot_password{
+				width:300px;
+			}
+			.create a{
+				text-decoration:none;
+				color:#777;
+				font-size:12px;
+			}
+			.create a:hover{
+				color:#000;
+			}
+			.create label{
+				display:block;
+				padding:10px 30px 0px 30px;
+				margin:10px 0px 0px 0px;
+			}
+			.create input[type="text"],
+			.create input[type="password"],
+			.create input[type="email"]
+			{
+				border: solid 1px #E5E5E5;
+				background: #FFFFFF;
+				margin: 5px 30px 0px 30px;
+				padding: 9px;
+				display:block;
+				font-size:16px;
+				width:76%;
+				background: 
+					-webkit-gradient(
+						linear,
+						left top,
+						left 25,
+						from(#FFFFFF),
+						color-stop(4%, #EEEEEE),
+						to(#FFFFFF)
+					);
+				background: 
+					-moz-linear-gradient(
+						top,
+						#FFFFFF,
+						#EEEEEE 1px,
+						#FFFFFF 25px
+						);
+				-moz-box-shadow: 0px 0px 8px #f0f0f0;
+				-webkit-box-shadow: 0px 0px 8px #f0f0f0;
+				box-shadow: 0px 0px 8px #f0f0f0;
+			}.create input[type="radio"]
+			{
+				border: solid 1px #E5E5E5;
+				background: #FFFFFF;
+				margin: 0;
+				padding: 0;
+			
+				font-size:6px;
+				width:36%;
+				 width     : 2em;
+  
+				background: 
+					-webkit-gradient(
+						linear,
+						left top,
+						left 25,
+						from(#FFFFFF),
+						color-stop(4%, #EEEEEE),
+						to(#FFFFFF)
+					);
+				background: 
+					-moz-linear-gradient(
+						top,
+						#FFFFFF,
+						#EEEEEE 1px,
+						#FFFFFF 25px
+						);
+				-moz-box-shadow: 0px 0px 8px #f0f0f0;
+				-webkit-box-shadow: 0px 0px 8px #f0f0f0;
+				box-shadow: 0px 0px 8px #f0f0f0;
+			}
+			
+			.create input[type="text"]:focus,
+			.create input[type="password"]:focus{
+				background:#feffef;
+			}
+			.create .bottom{
+				background-color:#444;
+				border-top:1px solid #ddd;
+				margin-top:20px;
+				clear:both;
+				color:#fff;
+				text-shadow:1px 1px 1px #000;
+			}
+			.create .bottom a{
+				display:block;
+				clear:both;
+				padding:10px 30px;
+				text-align:right;
+				color:#ffa800;
+				text-shadow:1px 1px 1px #000;
+			}
+			.create a.forgot{
+				float:right;
+				font-style:italic;
+				line-height:24px;
+				color:#ffa800;
+				text-shadow:1px 1px 1px #fff;
+			}
+			.create a.forgot:hover{
+				color:#000;
+			}
+			.create div.remember{
+				float:left;
+				width:140px;
+				margin:20px 0px 20px 30px;
+				font-size:11px;
+			}
+			.create div.remember input{
+				float:left;
+				margin:2px 5px 0px 0px;
+			}
+			.create span.error{
+				visibility:hidden;
+				color:red;
+				font-size:11px;
+				font-style:italic;
+				display:block;
+				margin:4px 30px;
+			}
+			.create input[type="submit"] {
+						background: #e3e3e3;
+				border: 1px solid #ccc;
+				color: #333;
+				font-family: "Trebuchet MS", "Myriad Pro", sans-serif;
+				font-size: 14px;
+				font-weight: bold;
+				padding: 8px 0 9px;
+				text-align: center;
+				width: 150px;
+				cursor:pointer;
+				float:right;
+				margin:15px 20px 10px 10px;
+				text-shadow: 0px 1px 0px #fff;
+				-moz-border-radius: 4px;
+				-webkit-border-radius: 4px;
+				border-radius: 4px;
+				-moz-box-shadow: 0px 0px 2px #fff inset;
+				-webkit-box-shadow: 0px 0px 2px #fff inset;
+				box-shadow: 0px 0px 2px #fff inset;
+				
+				
+			}
+			input[type="submit"]:hover {
+				background: #d9d9d9;
+				-moz-box-shadow: 0px 0px 2px #eaeaea inset;
+				-webkit-box-shadow: 0px 0px 2px #eaeaea inset;
+				box-shadow: 0px 0px 2px #eaeaea inset;
+				color: #222;
+			}
+	</style>
+</HEAD>
+
+<h2>Welcome!! {{name}}</h2>
+
+<BODY>
+<!--Handlebar templates end-->
+<script src="lib/jquery-1.10.2.min.js"></script>
+<script src="lib/handlebars.js"></script>
+<script src="js/my-script.js"></script>
+<div class="create">
+			<div class="content">
+<table class="table table-striped"  name="message">
+<h3>Project Summary Page:</h3><br>
+<h2>Select 'Data' to view existing Projects</h2>
+<thead>
+<tr>
+<th><label>Project ID</label></th>
+<th><label>Notes</label></th>
+<th><label>Comments</label></th>
+
+</tr>
+</thead>
+<tbody>
+
+{{#each message}}
+<tr>
+
+<td><label>{{ this.prjdesc }}</label></td>
+<td><label>{{ this.notes }}</label></td>
+<td><label>{{ this.taskdesc }}</label></td>
+
+</tr>
+{{/each}}
+<hr></table><table>
+<form name="create" method="post" action='first'>
+<input type="hidden" name="pref" id="pref" value="{{pref}}" />
+<input type="hidden" name="name" id="name" value="{{name}}" />
+
+    <td><label>Project ID</label></td>
+    <td><input type="text" id="prjdesc" name="prjdesc" /></td>
+     <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <td><label>Notes</label></td>
+    <td><input type="text" id="notes" name="notes" /></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <td><label>Comments</label></td>
+    <td><input type="text" id="taskdesc" name="taskdesc" /></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+</table>  
+
+  <table>
+     <input type="Submit" name="event" id="Submit"  />
+     <INPUT type="Submit" name ="Delete" id="Delete" value ="Delete"  />
+    <INPUT type="Submit"  name ="Edit Project" id="Edit Project" value="Edit Project" />
+    <INPUT type="Submit"  name ="Update Details" id="Update Details" value="Update Details" />
+     <INPUT type="Submit"  name ="Data" id="Data" value="Data"  />
+     
+</table>
+</div>
+</form>
+
+
+   
+
+
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,30 @@
+
+
+var mongoose = require('mongoose');
+var uriUtil = require('mongodb-uri');
+ 
+/* 
+ * Mongoose by default sets the auto_reconnect option to true.
+ * We recommend setting socket options at both the server and replica set level.
+ * We recommend a 30 second connection timeout because it allows for 
+ * plenty of time in most operating environments.
+ */
+var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }, 
+                replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };       
+var mongodbUri = 'mongodb://sample:sample@ds061248.mongolab.com:61248/team6';
+var mongooseUri = uriUtil.formatMongoose(mongodbUri);
+ 
+mongoose.connect(mongooseUri, options);
+var conn = mongoose.connection;             
+ 
+conn.on('error', console.error.bind(console, 'connection error:'));  
+ 
+conn.once('open', function() {
+    console.log('COnected!!!!!!!!!!!!!!!!!!!!');
+  // Wait for the database connection to establish, then start the app.                         
+});
+
+
+
+
+
